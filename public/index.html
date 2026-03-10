@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👥 Staff Management System</h1>
+            <p>نظام إدارة الموظفين والإجازات</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('admins')">👤 الأداريين</button>
+            <button class="tab-btn" onclick="showTab('vacations')">🏖️ الإجازات</button>
+        </nav>
+
+        <!-- Admins Tab -->
+        <div id="admins-tab" class="tab-content active">
+            <div class="section-header">
+                <h2>قائمة الأداريين</h2>
+                <button class="btn btn-primary" onclick="openAdminModal()">+ إضافة أداري</button>
+            </div>
+            
+            <table class="data-table" id="admins-table">
+                <thead>
+                    <tr>
+                        <th>الاسم</th>
+                        <th>الرتبة</th>
+                        <th>ملاحظات</th>
+                        <th>آخر ترقية</th>
+                        <th>الحالة</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="admins-list">
+                    <!-- يتملى بالجافاسكربت -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vacations Tab -->
+        <div id="vacations-tab" class="tab-content">
+            <div class="section-header">
+                <h2>طلبات الإجازات</h2>
+                <button class="btn btn-primary" onclick="openVacationModal()">+ طلب إجازة</button>
+            </div>
+            
+            <table class="data-table" id="vacations-table">
+                <thead>
+                    <tr>
+                        <th>الأداري</th>
+                        <th>من تاريخ</th>
+                        <th>إلى تاريخ</th>
+                        <th>السبب</th>
+                        <th>الحالة</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="vacations-list">
+                    <!-- يتملى بالجافاسكربت -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Admin Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('admin-modal')">&times;</span>
+            <h2>إضافة أداري جديد</h2>
+            <form id="admin-form" onsubmit="saveAdmin(event)">
+                <input type="hidden" id="admin-id">
+                <div class="form-group">
+                    <label>الاسم:</label>
+                    <input type="text" id="admin-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Discord ID:</label>
+                    <input type="text" id="admin-discord">
+                </div>
+                <div class="form-group">
+                    <label>الرتبة:</label>
+                    <select id="admin-rank">
+                        <option value="Junior">Junior</option>
+                        <option value="Senior">Senior</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Manager">Manager</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ملاحظات:</label>
+                    <textarea id="admin-notes"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>آخر ترقية:</label>
+                    <input type="date" id="admin-promotion">
+                </div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Vacation Modal -->
+    <div id="vacation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('vacation-modal')">&times;</span>
+            <h2>طلب إجازة</h2>
+            <form id="vacation-form" onsubmit="saveVacation(event)">
+                <div class="form-group">
+                    <label>الأداري:</label>
+                    <select id="vacation-admin" required>
+                        <!-- يتملى بالجافاسكربت -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>من تاريخ:</label>
+                    <input type="date" id="vacation-start" required>
+                </div>
+                <div class="form-group">
+                    <label>إلى تاريخ:</label>
+                    <input type="date" id="vacation-end" required>
+                </div>
+                <div class="form-group">
+                    <label>السبب:</label>
+                    <textarea id="vacation-reason" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
